@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 Area Under Distribution Curves - رياضيات 11 متقدم | Mr. Mohammed Hesham</title>
+<meta name="description" content="امتحان تفاعلي عن إيجاد المساحة تحت منحنيات التوزيع - رياضيات 11 متقدم">
+<meta name="author" content="Mr. Mohammed Hesham">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+body.en-mode { font-family: 'Inter', sans-serif; direction: ltr; }
+.arabic-math { font-family: 'Amiri', 'Cairo', serif; }
+.correct { background-color: #dcfce7 !important; border-color: #16a34a !important; }
+.incorrect { background-color: #fee2e2 !important; border-color: #dc2626 !important; }
+.timer-warning { color: #dc2626 !important; animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: 0.7; } }
+@media print { .no-print { display: none !important; } }
+.success-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.875rem; }
+.grade-excellent { background: #dcfce7; color: #166534; }
+.grade-good { background: #fef3c7; color: #92400e; }
+.grade-pass { background: #dbeafe; color: #1e40af; }
+.grade-fail { background: #fee2e2; color: #991b1b; }
+.lang-switch { position: fixed; top: 16px; left: 16px; z-index: 100; background: white; padding: 6px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; gap: 4px; border: 2px solid #2563eb; }
+body.en-mode .lang-switch { left: auto; right: 16px; }
+.lang-btn { padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: all 0.3s; border: none; font-size: 0.875rem; background: transparent; color: #6b7280; }
+.lang-btn.active { background: #2563eb; color: white; box-shadow: 0 2px 6px rgba(37,99,235,0.4); }
+.shuffle-badge { display: inline-block; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; margin-right: 8px; }
+body.en-mode .shuffle-badge { margin-right: 0; margin-left: 8px; }
+.math-display { display: inline-block; direction: ltr; font-family: 'Amiri', serif; font-size: 1.1em; padding: 2px 6px; background: #dbeafe; border-radius: 4px; margin: 2px; color: #1e40af; font-weight: 600; }
+.save-indicator { position: fixed; bottom: 20px; left: 20px; z-index: 200; background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+body.en-mode .save-indicator { left: auto; right: 20px; }
+.save-indicator.show { opacity: 1; }
+.formula-box { background: #dbeafe; border: 2px solid #2563eb; border-radius: 8px; padding: 12px; margin: 10px 0; font-family: 'Amiri', serif; direction: ltr; text-align: center; }
+.svg-graph { display: block; margin: 12px auto; background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 8px; max-width: 100%; }
+.graph-container { text-align: center; margin: 10px 0; }
+.module-badge { display: inline-block; padding: 4px 16px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+.module-1 { background: #dbeafe; color: #1e40af; }
+.module-2 { background: #fce7f3; color: #9f1239; }
+.module-3 { background: #ecfdf5; color: #065f46; }
+.module-4 { background: #fef3c7; color: #92400e; }
+.module-5 { background: #ede9fe; color: #5b21b6; }
+.module-6 { background: #fee2e2; color: #991b1b; }
+.question-card { background: white; border: 2px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: all 0.3s; }
+.question-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+.solution-box { display: none; background: #f0fdf4; border: 2px solid #16a34a; border-radius: 8px; padding: 15px; margin-top: 15px; animation: slideDown 0.3s ease-out; }
+.solution-box.show { display: block; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.check-btn { background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-right: 5px; transition: all 0.3s; }
+.check-btn:hover { background: #15803d; transform: translateY(-1px); }
+.show-answer-btn { background: #d97706; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s; }
+.show-answer-btn:hover { background: #b45309; transform: translateY(-1px); }
+</style>
+</head>
+<body class="p-4 md:p-8 min-h-screen">
+
+<div class="lang-switch no-print">
+<button class="lang-btn active" onclick="setLanguage('ar')" id="btn-ar">عربي</button>
+<button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+</div>
+
+<div id="saveIndicator" class="save-indicator">💾 <span data-ar="تم الحفظ" data-en="Saved">تم الحفظ</span></div>
+
+<div id="timer-container" class="max-w-5xl mx-auto mb-4 text-center no-print">
+<div class="bg-white p-4 rounded-2xl shadow-lg inline-block border-2 border-blue-100">
+<span class="text-gray-600 ml-2">⏰ <span data-ar="الوقت المتبقي:" data-en="Time Left:">الوقت المتبقي:</span></span>
+<span id="timer" class="text-2xl font-bold text-blue-700 font-mono">90:00</span>
+<span class="shuffle-badge">📊 <span data-ar="المساحة تحت منحنيات التوزيع" data-en="Area Under Distribution Curves">المساحة تحت منحنيات التوزيع</span> - 30 <span data-ar="سؤال" data-en="Questions">سؤال</span></span>
+</div>
+</div>
+
+<div class="max-w-5xl mx-auto mb-6 flex flex-wrap gap-3 justify-center no-print">
+<button onclick="toggleAnswers()" class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2 rounded-xl font-medium transition shadow">👀 <span data-ar="إظهار/إخفاء كل الإجابات" data-en="Show/Hide All Answers">إظهار/إخفاء كل الإجابات</span></button>
+<button onclick="window.print()" class="bg-gray-700 hover:bg-gray-900 text-white px-5 py-2 rounded-xl font-medium transition shadow">🖨️ <span data-ar="طباعة" data-en="Print">طباعة</span></button>
+<button onclick="reshuffleExam()" class="bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 text-white px-5 py-2 rounded-xl font-medium transition shadow">🔄 <span data-ar="أسئلة جديدة" data-en="New Questions">أسئلة جديدة</span></button>
+<button onclick="clearProgress()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl font-medium transition shadow">🗑️ <span data-ar="مسح التقدم" data-en="Clear Progress">مسح التقدم</span></button>
+</div>
+
+<header class="max-w-5xl mx-auto bg-white p-8 rounded-3xl shadow-2xl mb-8 border-4 border-blue-500">
+<div class="text-center">
+<div class="inline-block bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold mb-4">MATH 11 ADVANCED - QUESTION 20</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">📊 <span data-ar="إيجاد المساحة تحت منحنيات التوزيع" data-en="Finding Area Under Distribution Curves">إيجاد المساحة تحت منحنيات التوزيع</span></h1>
+<h2 class="text-xl text-blue-700 font-semibold mb-2"><span data-ar="رياضيات 11 متقدم - مثال 1 وتمارين (صفحة 669)" data-en="Grade 11 Advanced - Example 1 & Exercises (Page 669)">رياضيات 11 متقدم - مثال 1 وتمارين (صفحة 669)</span></h2>
+<p class="text-gray-600 mb-4"><span data-ar="Normal Distribution, Empirical Rule & Z-Scores" data-en="Normal Distribution, Empirical Rule & Z-Scores">Normal Distribution, Empirical Rule & Z-Scores</span></p>
+<p class="text-sm text-green-600 font-semibold">💾 <span data-ar="يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام" data-en="Your progress is auto-saved - 30 questions in 6 sections">يتم حفظ تقدمك تلقائياً - 30 سؤالاً في 6 أقسام</span></p>
+</div>
+<div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+<span>📅 <span data-ar="التاريخ:" data-en="Date:">التاريخ:</span> <input type="text" id="examDate" class="border-b-2 border-blue-300 bg-transparent w-32 text-center"></span>
+<span>😊 <span data-ar="الاسم:" data-en="Name:">الاسم:</span> <input type="text" id="studentName" class="border-b-2 border-blue-300 bg-transparent w-40 text-center" data-placeholder-ar="اكتب اسمك" data-placeholder-en="Your name" placeholder="اكتب اسمك"></span>
+<span>🏫 <span data-ar="الشعبة:" data-en="Class:">الشعبة:</span> <input type="text" id="studentClass" class="border-b-2 border-blue-300 bg-transparent w-32 text-center" data-placeholder-ar="الشعبة" data-placeholder-en="Class" placeholder="الشعبة"></span>
+<span>⏰ <span data-ar="المدة: 90 دقيقة" data-en="Duration: 90 min">المدة: 90 دقيقة</span></span>
+<span>📊 <span data-ar="المجموع: 100 درجة" data-en="Total: 100 points">المجموع: 100 درجة</span></span>
+</div>
+</header>
+
+<div class="max-w-5xl mx-auto mb-6 bg-white p-4 rounded-xl shadow-lg border-2 border-blue-200 no-print">
+<h3 class="font-bold text-lg mb-3 text-blue-800 text-center">📐 <span data-ar="القاعدة التجريبية (68-95-99.7)" data-en="Empirical Rule (68-95-99.7)">القاعدة التجريبية (68-95-99.7)</span></h3>
+<div class="grid md:grid-cols-3 gap-3 text-sm">
+<div class="formula-box">
+<strong><span data-ar="±1 انحراف معياري:" data-en="±1 Standard Deviation:">±1 انحراف معياري:</span></strong><br>
+<span class="math-display">μ ± σ → 68%</span><br>
+<span data-ar="68% من البيانات" data-en="68% of data">68% من البيانات</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="±2 انحراف معياري:" data-en="±2 Standard Deviations:">±2 انحراف معياري:</span></strong><br>
+<span class="math-display">μ ± 2σ → 95%</span><br>
+<span data-ar="95% من البيانات" data-en="95% of data">95% من البيانات</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="±3 انحراف معياري:" data-en="±3 Standard Deviations:">±3 انحراف معياري:</span></strong><br>
+<span class="math-display">μ ± 3σ → 99.7%</span><br>
+<span data-ar="99.7% من البيانات" data-en="99.7% of data">99.7% من البيانات</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="الدرجة المعيارية Z:" data-en="Z-Score:">الدرجة المعيارية Z:</span></strong><br>
+<span class="math-display">z = (x - μ)/σ</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="التوزيع الطبيعي:" data-en="Normal Distribution:">التوزيع الطبيعي:</span></strong><br>
+<span data-ar="متماثل حول المتوسط μ" data-en="Symmetric about mean μ">متماثل حول المتوسط μ</span><br>
+<span data-ar="المساحة الكلية = 1 (100%)" data-en="Total area = 1 (100%)">المساحة الكلية = 1 (100%)</span>
+</div>
+<div class="formula-box">
+<strong><span data-ar="التحويل للقياسي:" data-en="Standardization:">التحويل للقياسي:</span></strong><br>
+<span class="math-display">Z ~ N(0, 1)</span><br>
+<span data-ar="μ=0, σ=1" data-en="μ=0, σ=1">μ=0, σ=1</span>
+</div>
+</div>
+</div>
+
+<main class="max-w-5xl mx-auto space-y-8" id="exam-content"></main>
+
+<div class="text-center no-print pb-8 mt-8">
+<button onclick="gradeExam()" class="bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 text-white text-lg px-12 py-4 rounded-2xl font-bold shadow-xl transition transform hover:scale-105">🎯 <span data-ar="صحح إجاباتي!" data-en="Grade My Exam!">صحح إجاباتي!</span></button>
+</div>
+
+<div id="results-panel" class="max-w-5xl mx-auto mt-8 bg-white p-8 rounded-3xl shadow-2xl border-4 border-blue-500 hidden no-print">
+<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">🏆 <span data-ar="نتيجتك يا بطل!" data-en="Your Result, Champion!">نتيجتك يا بطل!</span> 🏆</h2>
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+<div class="bg-blue-50 p-4 rounded-xl text-center"><p>😊 <span data-ar="الاسم" data-en="Name">الاسم</span></p><p id="res-name" class="font-bold text-xl text-blue-700">-</p></div>
+<div class="bg-indigo-50 p-4 rounded-xl text-center"><p>📅 <span data-ar="التاريخ" data-en="Date">التاريخ</span></p><p id="res-date" class="font-bold text-xl text-indigo-700">-</p></div>
+<div class="bg-blue-50 p-4 rounded-xl text-center"><p>🌟 <span data-ar="المجموع" data-en="Total">المجموع</span></p><p id="res-total" class="font-bold text-3xl text-blue-700">0 / 100</p></div>
+</div>
+<div class="text-center mb-6">
+<span id="success-badge" class="success-badge grade-excellent">-</span>
+<p id="success-percent" class="text-4xl font-bold text-blue-700 mt-2">0%</p>
+<p class="text-sm text-gray-500"><span data-ar="نسبة النجاح" data-en="Success Rate">نسبة النجاح</span></p>
+</div>
+<div class="bg-gray-50 p-6 rounded-xl mb-6">
+<h3 class="font-bold text-lg mb-4 text-gray-800">📊 <span data-ar="أداؤك في كل قسم:" data-en="Your Performance by Section:">أداؤك في كل قسم:</span></h3>
+<div class="space-y-3" id="sections-performance"></div>
+</div>
+<div class="text-center">
+<button id="sendEmailBtn" onclick="sendResultsToEmail()" class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white text-lg px-8 py-3 rounded-2xl font-bold shadow-xl transition">📧 <span data-ar="أرسل النتيجة للمعلم" data-en="Send Result to Teacher">أرسل النتيجة للمعلم</span></button>
+<p id="emailStatus" class="text-sm mt-2 text-center font-medium"></p>
+</div>
+</div>
+
+<footer class="max-w-5xl mx-auto mt-10 mb-8 text-center text-gray-500 text-sm no-print">
+© Area Under Distribution Curves - Grade 11 Advanced | Mr. Mohammed Hesham 📊
+</footer>
+
+<script>
+const PUBLIC_KEY = "Rb3Lq8tXaFmc5YHUH";
+const SERVICE_ID = "service_w15m64i";
+const TEMPLATE_ID = "template_5b0u2tq";
+const TARGET_EMAIL = "mohammedhesham872@gmail.com";
+emailjs.init(PUBLIC_KEY);
+
+const STORAGE_KEY = 'area_under_distribution_grade11_v1';
+const TOTAL_TIME = 5400;
+const TOTAL_QUESTIONS = 30;
+const TOTAL_SECTIONS = 6;
+const QUESTIONS_PER_SECTION = 5;
+
+let currentSeed = null;
+let answersVisible = false;
+let saveIndicatorTimeout = null;
+let currentLang = 'ar';
+let timeRemaining = TOTAL_TIME;
+let timerInterval;
+let examData;
+let correctAnswersMap = {};
+let rng = null;
+
+function mulberry32(a) {
+    return function() {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+
+function showSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.classList.add('show');
+    if (saveIndicatorTimeout) clearTimeout(saveIndicatorTimeout);
+    saveIndicatorTimeout = setTimeout(() => indicator.classList.remove('show'), 1500);
+}
+
+function saveState(showIndicator = true) {
+    try {
+        const state = {
+            seed: currentSeed, lang: currentLang,
+            studentName: document.getElementById('studentName').value,
+            studentClass: document.getElementById('studentClass').value,
+            examDate: document.getElementById('examDate').value,
+            answers: getSelectedAnswers(),
+            timeRemaining: timeRemaining,
+            answersVisible: answersVisible, savedAt: Date.now()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        if (showIndicator) showSaveIndicator();
+    } catch (e) { console.error('Save error:', e); }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) { return null; }
+}
+
+function getSelectedAnswers() {
+    const answers = {};
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const selected = document.querySelector('input[name="q'+i+'"]:checked');
+        if (selected) answers[i] = selected.value;
+    }
+    return answers;
+}
+
+function restoreAnswers(answers) {
+    if (!answers) return;
+    for (const [idx, val] of Object.entries(answers)) {
+        const radio = document.querySelector('input[name="q'+idx+'"][value="'+val+'"]');
+        if (radio) radio.checked = true;
+    }
+}
+
+function clearProgress() {
+    const msg = currentLang === 'ar' ? '⚠️ هل أنت متأكد من مسح كل التقدم؟' : '⚠️ Clear all progress?';
+    if (confirm(msg)) { localStorage.removeItem(STORAGE_KEY); location.reload(); }
+}
+
+function setupAnswerListeners() {
+    document.getElementById('exam-content').addEventListener('change', (e) => {
+        if (e.target.type === 'radio') saveState();
+    });
+}
+
+function setupInputListeners() {
+    ['studentName', 'studentClass', 'examDate'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.addEventListener('input', () => saveState(false));
+            el.addEventListener('blur', () => saveState());
+        }
+    });
+}
+
+// ==================== SVG DIAGRAMS - ACCURATE NORMAL DISTRIBUTION VISUALS ====================
+const svgGraphs = {
+    empirical_rule: `<svg class="svg-graph" width="500" height="380" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="370" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="bold">📊 القاعدة التجريبية 68-95-99.7 - Empirical Rule</text>
+        <!-- Normal curve -->
+        <path d="M 50 280 Q 100 280 150 250 Q 200 200 220 150 Q 240 100 250 90 Q 260 100 280 150 Q 300 200 350 250 Q 400 280 450 280" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+        <!-- Baseline -->
+        <line x1="50" y1="280" x2="450" y2="280" stroke="#374151" stroke-width="2"/>
+        <!-- Mean line -->
+        <line x1="250" y1="90" x2="250" y2="280" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="250" y="300" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">μ</text>
+        <!-- ±1σ -->
+        <line x1="190" y1="150" x2="190" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+        <line x1="310" y1="150" x2="310" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="190" y="300" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">μ-σ</text>
+        <text x="310" y="300" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">μ+σ</text>
+        <!-- ±2σ -->
+        <line x1="130" y1="250" x2="130" y2="280" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3"/>
+        <line x1="370" y1="250" x2="370" y2="280" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="130" y="315" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="bold">μ-2σ</text>
+        <text x="370" y="315" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="bold">μ+2σ</text>
+        <!-- ±3σ -->
+        <line x1="70" y1="275" x2="70" y2="280" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3"/>
+        <line x1="430" y1="275" x2="430" y2="280" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="70" y="330" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">μ-3σ</text>
+        <text x="430" y="330" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">μ+3σ</text>
+        <!-- Shaded regions -->
+        <path d="M 190 280 Q 220 200 250 90 Q 280 200 310 280 Z" fill="#16a34a" opacity="0.3"/>
+        <text x="250" y="130" text-anchor="middle" font-size="12" fill="#166534" font-weight="bold">68%</text>
+        <path d="M 130 280 Q 160 240 190 280 L 190 280 L 310 280 Q 340 240 370 280 Z" fill="#f59e0b" opacity="0.2"/>
+        <text x="160" y="265" text-anchor="middle" font-size="9" fill="#92400e">13.5%</text>
+        <text x="340" y="265" text-anchor="middle" font-size="9" fill="#92400e">13.5%</text>
+        <text x="100" y="270" text-anchor="middle" font-size="8" fill="#5b21b6">2.35%</text>
+        <text x="400" y="270" text-anchor="middle" font-size="8" fill="#5b21b6">2.35%</text>
+        <!-- Summary -->
+        <rect x="20" y="340" width="460" height="30" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="360" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">68% within ±1σ | 95% within ±2σ | 99.7% within ±3σ</text>
+    </svg>`,
+    
+    example1_heights: `<svg class="svg-graph" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="390" rx="12" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#9f1239" font-weight="bold">📝 مثال 1: أطوال الطلاب - μ=168, σ=6, n=880</text>
+        <!-- Normal curve -->
+        <path d="M 50 280 Q 100 280 150 250 Q 200 200 220 150 Q 240 100 250 90 Q 260 100 280 150 Q 300 200 350 250 Q 400 280 450 280" fill="none" stroke="#ec4899" stroke-width="2.5"/>
+        <line x1="50" y1="280" x2="450" y2="280" stroke="#374151" stroke-width="2"/>
+        <!-- Mean at 168 -->
+        <line x1="250" y1="90" x2="250" y2="280" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="250" y="300" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">168 cm</text>
+        <!-- +1σ at 174 -->
+        <line x1="310" y1="150" x2="310" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="310" y="300" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">174</text>
+        <!-- +2σ at 180 -->
+        <line x1="370" y1="250" x2="370" y2="280" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="370" y="300" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="bold">180</text>
+        <!-- -1σ at 162 -->
+        <line x1="190" y1="150" x2="190" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="190" y="300" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">162</text>
+        <!-- -2σ at 156 -->
+        <line x1="130" y1="250" x2="130" y2="280" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="130" y="300" text-anchor="middle" font-size="10" fill="#f59e0b" font-weight="bold">156</text>
+        <!-- -3σ at 150 -->
+        <line x1="70" y1="275" x2="70" y2="280" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="70" y="300" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">150</text>
+        <!-- +3σ at 186 -->
+        <line x1="430" y1="275" x2="430" y2="280" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="430" y="300" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">186</text>
+        <!-- Shaded region for part a: > 180 cm -->
+        <path d="M 370 280 Q 400 270 430 275 L 450 280 Z" fill="#dc2626" opacity="0.4"/>
+        <text x="410" y="265" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">2.5%</text>
+        <!-- Shaded region for part b: 150 to 174 -->
+        <path d="M 70 280 Q 130 260 190 200 Q 220 150 250 90 Q 280 150 310 250 L 310 280 Z" fill="#2563eb" opacity="0.3"/>
+        <text x="200" y="220" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">150 to 174 cm</text>
+        <!-- Info boxes -->
+        <rect x="20" y="320" width="220" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Part a: P(X > 180)</text>
+        <text x="130" y="357" text-anchor="middle" font-size="9" fill="#92400e">180 = μ + 2σ</text>
+        <text x="130" y="372" text-anchor="middle" font-size="9" fill="#92400e">P = 2.5% → 22 students</text>
+        <rect x="260" y="320" width="220" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="370" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Part b: P(150 &lt; X &lt; 174)</text>
+        <text x="370" y="357" text-anchor="middle" font-size="9" fill="#92400e">150 = μ-3σ, 174 = μ+σ</text>
+        <text x="370" y="372" text-anchor="middle" font-size="9" fill="#92400e">P = 49.85% + 34% = 83.85%</text>
+    </svg>`,
+    
+    exercise1_bottles: `<svg class="svg-graph" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="390" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">🍼 تمرين 1: قوارير الماء - μ=1.1L, σ=0.02L, n=120</text>
+        <!-- Normal curve -->
+        <path d="M 50 280 Q 100 280 150 250 Q 200 200 220 150 Q 240 100 250 90 Q 260 100 280 150 Q 300 200 350 250 Q 400 280 450 280" fill="none" stroke="#10b981" stroke-width="2.5"/>
+        <line x1="50" y1="280" x2="450" y2="280" stroke="#374151" stroke-width="2"/>
+        <!-- Mean at 1.1 -->
+        <line x1="250" y1="90" x2="250" y2="280" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="250" y="300" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">1.10 L</text>
+        <!-- +1σ at 1.12 -->
+        <line x1="310" y1="150" x2="310" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="310" y="300" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">1.12</text>
+        <!-- +2σ at 1.14 -->
+        <line x1="370" y1="250" x2="370" y2="280" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="370" y="300" text-anchor="middle" font-size="9" fill="#f59e0b" font-weight="bold">1.14</text>
+        <!-- -1σ at 1.08 -->
+        <line x1="190" y1="150" x2="190" y2="280" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="190" y="300" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">1.08</text>
+        <!-- -2σ at 1.06 -->
+        <line x1="130" y1="250" x2="130" y2="280" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="130" y="300" text-anchor="middle" font-size="9" fill="#f59e0b" font-weight="bold">1.06</text>
+        <!-- -3σ at 1.04 -->
+        <line x1="70" y1="275" x2="70" y2="280" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="70" y="300" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">1.04</text>
+        <!-- +3σ at 1.16 -->
+        <line x1="430" y1="275" x2="430" y2="280" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="3"/>
+        <text x="430" y="300" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">1.16</text>
+        <!-- Part A: less than 1.06 -->
+        <path d="M 50 280 L 130 280 L 130 250 Q 100 270 70 275 L 50 280 Z" fill="#dc2626" opacity="0.4"/>
+        <text x="90" y="260" text-anchor="middle" font-size="9" fill="#dc2626" font-weight="bold">Part A: &lt;1.06</text>
+        <!-- Part B: between 1.08 and 1.14 -->
+        <path d="M 190 280 Q 220 200 250 90 Q 280 200 310 250 Q 340 270 370 280 Z" fill="#2563eb" opacity="0.3"/>
+        <text x="280" y="200" text-anchor="middle" font-size="9" fill="#1e40af" font-weight="bold">Part B: 1.08 to 1.14</text>
+        <!-- Info boxes -->
+        <rect x="20" y="320" width="220" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="130" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Part A: P(X &lt; 1.06)</text>
+        <text x="130" y="357" text-anchor="middle" font-size="9" fill="#92400e">1.06 = μ - 2σ</text>
+        <text x="130" y="372" text-anchor="middle" font-size="9" fill="#92400e">P = 2.5% → 3 bottles</text>
+        <rect x="260" y="320" width="220" height="65" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="370" y="340" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Part B: P(1.08 &lt; X &lt; 1.14)</text>
+        <text x="370" y="357" text-anchor="middle" font-size="9" fill="#92400e">1.08 = μ-σ, 1.14 = μ+2σ</text>
+        <text x="370" y="372" text-anchor="middle" font-size="9" fill="#92400e">P = 34% + 34% + 13.5% = 81.5%</text>
+    </svg>`,
+    
+    z_score_visual: `<svg class="svg-graph" width="500" height="340" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="330" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#5b21b6" font-weight="bold">📏 الدرجة المعيارية Z - Z-Score</text>
+        <!-- Formula -->
+        <rect x="20" y="45" width="460" height="50" rx="6" fill="#ddd6fe" stroke="#7c3aed" stroke-width="2"/>
+        <text x="250" y="70" text-anchor="middle" font-size="14" fill="#5b21b6" font-family="'Amiri', serif" font-weight="bold">z = (x - μ) / σ</text>
+        <text x="250" y="90" text-anchor="middle" font-size="10" fill="#5b21b6">z = (value - mean) / standard deviation</text>
+        <!-- Number line -->
+        <line x1="50" y1="180" x2="450" y2="180" stroke="#374151" stroke-width="2" marker-end="url(#arrowZ)"/>
+        <text x="455" y="185" font-size="11" fill="#374151" font-weight="bold">z</text>
+        <!-- Z values -->
+        <line x1="100" y1="175" x2="100" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="100" y="200" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">-3</text>
+        <line x1="170" y1="175" x2="170" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="170" y="200" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">-2</text>
+        <line x1="240" y1="175" x2="240" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="240" y="200" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">-1</text>
+        <line x1="310" y1="175" x2="310" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="310" y="200" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">0</text>
+        <line x1="380" y1="175" x2="380" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="380" y="200" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">1</text>
+        <line x1="450" y1="175" x2="450" y2="185" stroke="#374151" stroke-width="2"/>
+        <text x="450" y="200" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">2</text>
+        <!-- Standard normal curve -->
+        <path d="M 50 250 Q 100 250 150 230 Q 200 200 240 160 Q 280 120 310 110 Q 340 120 380 160 Q 420 200 450 230 Q 470 250 490 250" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+        <!-- Shaded area for z < 1 -->
+        <path d="M 50 250 Q 100 250 150 230 Q 200 200 240 160 Q 280 120 310 110 Q 340 120 380 160 L 380 250 Z" fill="#7c3aed" opacity="0.3"/>
+        <text x="250" y="145" text-anchor="middle" font-size="11" fill="#5b21b6" font-weight="bold">P(Z &lt; 1) ≈ 84.13%</text>
+        <!-- Interpretation -->
+        <rect x="20" y="265" width="460" height="55" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="285" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">تفسير الدرجة المعيارية:</text>
+        <text x="250" y="302" text-anchor="middle" font-size="9" fill="#92400e">z = 0: عند المتوسط | z &gt; 0: فوق المتوسط | z &lt; 0: تحت المتوسط</text>
+        <text x="250" y="317" text-anchor="middle" font-size="9" fill="#92400e">|z| = 1: انحراف معياري واحد | |z| = 2: انحرافان معياريان</text>
+        <defs><marker id="arrowZ" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#374151"/></marker></defs>
+    </svg>`,
+    
+    standard_normal_table: `<svg class="svg-graph" width="500" height="380" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="370" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">📋 قيم Z الشائعة - Common Z-Values</text>
+        <!-- Table -->
+        <rect x="20" y="45" width="120" height="30" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="80" y="65" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Z-value</text>
+        <rect x="140" y="45" width="160" height="30" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="220" y="65" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">P(Z &lt; z)</text>
+        <rect x="300" y="45" width="180" height="30" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="390" y="65" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">Area from mean</text>
+        <!-- Row 1 -->
+        <rect x="20" y="75" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="92" text-anchor="middle" font-size="10" fill="#92400e">-3.00</text>
+        <rect x="140" y="75" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="92" text-anchor="middle" font-size="10" fill="#92400e">0.0013 (0.13%)</text>
+        <rect x="300" y="75" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="92" text-anchor="middle" font-size="10" fill="#92400e">49.87%</text>
+        <!-- Row 2 -->
+        <rect x="20" y="100" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="117" text-anchor="middle" font-size="10" fill="#92400e">-2.00</text>
+        <rect x="140" y="100" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="117" text-anchor="middle" font-size="10" fill="#92400e">0.0228 (2.28%)</text>
+        <rect x="300" y="100" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="117" text-anchor="middle" font-size="10" fill="#92400e">47.72%</text>
+        <!-- Row 3 -->
+        <rect x="20" y="125" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="142" text-anchor="middle" font-size="10" fill="#92400e">-1.00</text>
+        <rect x="140" y="125" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="142" text-anchor="middle" font-size="10" fill="#92400e">0.1587 (15.87%)</text>
+        <rect x="300" y="125" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="142" text-anchor="middle" font-size="10" fill="#92400e">34.13%</text>
+        <!-- Row 4 -->
+        <rect x="20" y="150" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="167" text-anchor="middle" font-size="10" fill="#92400e">0.00</text>
+        <rect x="140" y="150" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="167" text-anchor="middle" font-size="10" fill="#92400e">0.5000 (50%)</text>
+        <rect x="300" y="150" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="167" text-anchor="middle" font-size="10" fill="#92400e">0%</text>
+        <!-- Row 5 -->
+        <rect x="20" y="175" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="192" text-anchor="middle" font-size="10" fill="#92400e">1.00</text>
+        <rect x="140" y="175" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="192" text-anchor="middle" font-size="10" fill="#92400e">0.8413 (84.13%)</text>
+        <rect x="300" y="175" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="192" text-anchor="middle" font-size="10" fill="#92400e">34.13%</text>
+        <!-- Row 6 -->
+        <rect x="20" y="200" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="217" text-anchor="middle" font-size="10" fill="#92400e">2.00</text>
+        <rect x="140" y="200" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="217" text-anchor="middle" font-size="10" fill="#92400e">0.9772 (97.72%)</text>
+        <rect x="300" y="200" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="217" text-anchor="middle" font-size="10" fill="#92400e">47.72%</text>
+        <!-- Row 7 -->
+        <rect x="20" y="225" width="120" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="80" y="242" text-anchor="middle" font-size="10" fill="#92400e">3.00</text>
+        <rect x="140" y="225" width="160" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="220" y="242" text-anchor="middle" font-size="10" fill="#92400e">0.9987 (99.87%)</text>
+        <rect x="300" y="225" width="180" height="25" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+        <text x="390" y="242" text-anchor="middle" font-size="10" fill="#92400e">49.87%</text>
+        <!-- Key regions -->
+        <rect x="20" y="265" width="460" height="100" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="285" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">🔑 المناطق الرئيسية تحت المنحنى:</text>
+        <text x="250" y="305" text-anchor="middle" font-size="10" fill="#92400e">• بين μ و μ+σ: 34.13% | بين μ و μ+2σ: 47.72% | بين μ و μ+3σ: 49.87%</text>
+        <text x="250" y="323" text-anchor="middle" font-size="10" fill="#92400e">• أكبر من μ+σ: 15.87% | أكبر من μ+2σ: 2.28% | أكبر من μ+3σ: 0.13%</text>
+        <text x="250" y="341" text-anchor="middle" font-size="10" fill="#92400e">• أقل من μ-σ: 15.87% | أقل من μ-2σ: 2.28% | أقل من μ-3σ: 0.13%</text>
+        <text x="250" y="359" text-anchor="middle" font-size="10" fill="#92400e">💡 استخدم التماثل: P(Z &lt; -z) = P(Z &gt; z) = 1 - P(Z &lt; z)</text>
+    </svg>`,
+    
+    area_regions: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">📐 مناطق المساحة تحت المنحنى الطبيعي</text>
+        <!-- Normal curve -->
+        <path d="M 50 250 Q 100 250 150 220 Q 200 170 220 120 Q 240 80 250 70 Q 260 80 280 120 Q 300 170 350 220 Q 400 250 450 250" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+        <line x1="50" y1="250" x2="450" y2="250" stroke="#374151" stroke-width="2"/>
+        <!-- Center line -->
+        <line x1="250" y1="70" x2="250" y2="250" stroke="#374151" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="250" y="270" text-anchor="middle" font-size="10" fill="#374151" font-weight="bold">μ (0)</text>
+        <!-- Region labels -->
+        <text x="130" y="200" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">2.35%</text>
+        <text x="190" y="170" text-anchor="middle" font-size="9" fill="#f59e0b" font-weight="bold">13.5%</text>
+        <text x="220" y="130" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">34%</text>
+        <text x="280" y="130" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="bold">34%</text>
+        <text x="310" y="170" text-anchor="middle" font-size="9" fill="#f59e0b" font-weight="bold">13.5%</text>
+        <text x="370" y="200" text-anchor="middle" font-size="9" fill="#7c3aed" font-weight="bold">2.35%</text>
+        <text x="80" y="240" text-anchor="middle" font-size="8" fill="#dc2626">0.15%</text>
+        <text x="420" y="240" text-anchor="middle" font-size="8" fill="#dc2626">0.15%</text>
+        <!-- Sigma markers -->
+        <text x="190" y="270" text-anchor="middle" font-size="9" fill="#16a34a">-1σ</text>
+        <text x="310" y="270" text-anchor="middle" font-size="9" fill="#16a34a">+1σ</text>
+        <text x="130" y="270" text-anchor="middle" font-size="9" fill="#f59e0b">-2σ</text>
+        <text x="370" y="270" text-anchor="middle" font-size="9" fill="#f59e0b">+2σ</text>
+        <text x="70" y="270" text-anchor="middle" font-size="9" fill="#7c3aed">-3σ</text>
+        <text x="430" y="270" text-anchor="middle" font-size="9" fill="#7c3aed">+3σ</text>
+        <!-- Summary -->
+        <rect x="20" y="285" width="460" height="55" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="305" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">💡 كيفية حساب المساحات:</text>
+        <text x="250" y="322" text-anchor="middle" font-size="9" fill="#92400e">P(a &lt; X &lt; b) = P(X &lt; b) - P(X &lt; a)</text>
+        <text x="250" y="337" text-anchor="middle" font-size="9" fill="#92400e">P(X &gt; a) = 1 - P(X &lt; a) | P(X &lt; -a) = P(X &gt; a) (by symmetry)</text>
+    </svg>`,
+    
+    normal_distribution_properties: `<svg class="svg-graph" width="500" height="340" viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="330" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">📊 خصائص التوزيع الطبيعي</text>
+        <!-- Properties list -->
+        <rect x="20" y="45" width="450" height="40" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="245" y="70" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">1. متماثل حول المتوسط (Symmetric about mean)</text>
+        <rect x="20" y="95" width="450" height="40" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="245" y="120" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">2. المتوسط = الوسيط = المنوال</text>
+        <rect x="20" y="145" width="450" height="40" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="245" y="170" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">3. المساحة الكلية تحت المنحنى = 1 (100%)</text>
+        <rect x="20" y="195" width="450" height="40" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="245" y="220" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">4. يقترب من المحور x لكن لا يلمسه (Asymptotic)</text>
+        <rect x="20" y="245" width="450" height="40" rx="6" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+        <text x="245" y="270" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">5. محدد بالكامل بـ μ و σ فقط</text>
+        <rect x="20" y="295" width="450" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="245" y="317" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">68% within ±1σ | 95% within ±2σ | 99.7% within ±3σ</text>
+    </svg>`,
+    
+    comparison_curves: `<svg class="svg-graph" width="500" height="360" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="490" height="350" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">📊 مقارنة التوزيعات الطبيعية المختلفة</text>
+        <!-- Curve 1: small sigma (tall narrow) -->
+        <path d="M 100 280 Q 150 280 180 200 Q 210 100 220 70 Q 230 100 260 200 Q 290 280 340 280" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+        <text x="220" y="60" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Small σ</text>
+        <!-- Curve 2: medium sigma -->
+        <path d="M 50 280 Q 120 275 170 230 Q 210 180 230 150 Q 250 130 270 150 Q 290 180 330 230 Q 380 275 450 280" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+        <text x="250" y="120" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="bold">Medium σ</text>
+        <!-- Curve 3: large sigma (short wide) -->
+        <path d="M 30 280 Q 100 275 170 260 Q 220 245 250 240 Q 280 245 330 260 Q 400 275 470 280" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+        <text x="250" y="235" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="bold">Large σ</text>
+        <!-- Mean line -->
+        <line x1="250" y1="50" x2="250" y2="280" stroke="#374151" stroke-width="1" stroke-dasharray="4"/>
+        <text x="250" y="295" text-anchor="middle" font-size="10" fill="#374151" font-weight="bold">Same μ, different σ</text>
+        <!-- Explanation -->
+        <rect x="20" y="305" width="460" height="45" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="250" y="323" text-anchor="middle" font-size="10" fill="#92400e">σ صغير → منحنى ضيق وطويل (بيانات متمركزة)</text>
+        <text x="250" y="340" text-anchor="middle" font-size="10" fill="#92400e">σ كبير → منحنى عريض ومنخفض (بيانات منتشرة)</text>
+    </svg>`
+};
+
+// ==================== EXAM DATA - 30 QUESTIONS ====================
+const originalExamData = {
+    sections: [
+        {
+            id: 'sec1',
+            title: { ar: '🔹 القسم 1: القاعدة التجريبية 68-95-99.7 (Q1-Q5)', en: '🔹 Section 1: Empirical Rule 68-95-99.7 (Q1-Q5)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س1:</strong> في التوزيع الطبيعي، ما نسبة البيانات التي تقع ضمن انحراف معياري واحد (±1σ) من المتوسط؟', en: '<strong>Q1:</strong> In normal distribution, what percentage of data falls within ±1 standard deviation of mean?' },
+                    svg: svgGraphs.empirical_rule,
+                    options: [
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">99.7%</span>', en: '<span class="math-display">99.7%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '68% من البيانات تقع ضمن ±1 انحراف معياري من المتوسط', en: '68% of data falls within ±1 standard deviation of the mean' }
+                },
+                {
+                    q: { ar: '<strong>س2:</strong> ما نسبة البيانات التي تقع ضمن انحرافين معياريين (±2σ) من المتوسط؟', en: '<strong>Q2:</strong> What percentage of data falls within ±2 standard deviations of mean?' },
+                    options: [
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">99.7%</span>', en: '<span class="math-display">99.7%</span>' },
+                        { ar: '<span class="math-display">90%</span>', en: '<span class="math-display">90%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '95% من البيانات تقع ضمن ±2 انحراف معياري', en: '95% of data falls within ±2 standard deviations' }
+                },
+                {
+                    q: { ar: '<strong>س3:</strong> ما نسبة البيانات التي تقع ضمن ثلاثة انحرافات معيارية (±3σ) من المتوسط؟', en: '<strong>Q3:</strong> What percentage of data falls within ±3 standard deviations of mean?' },
+                    options: [
+                        { ar: '<span class="math-display">99.7%</span>', en: '<span class="math-display">99.7%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">100%</span>', en: '<span class="math-display">100%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '99.7% من البيانات تقع ضمن ±3 انحراف معياري', en: '99.7% of data falls within ±3 standard deviations' }
+                },
+                {
+                    q: { ar: '<strong>س4:</strong> ما نسبة البيانات التي تقع فوق μ+2σ في التوزيع الطبيعي؟', en: '<strong>Q4:</strong> What percentage of data lies above μ+2σ in normal distribution?' },
+                    options: [
+                        { ar: '<span class="math-display">2.5%</span>', en: '<span class="math-display">2.5%</span>' },
+                        { ar: '<span class="math-display">5%</span>', en: '<span class="math-display">5%</span>' },
+                        { ar: '<span class="math-display">16%</span>', en: '<span class="math-display">16%</span>' },
+                        { ar: '<span class="math-display">0.15%</span>', en: '<span class="math-display">0.15%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '5% خارج ±2σ، نصفها فوق = 2.5%', en: '5% outside ±2σ, half above = 2.5%' }
+                },
+                {
+                    q: { ar: '<strong>س5:</strong> ما نسبة البيانات التي تقع بين μ و μ+σ؟', en: '<strong>Q5:</strong> What percentage of data lies between μ and μ+σ?' },
+                    options: [
+                        { ar: '<span class="math-display">34%</span> (نصف 68%)', en: '<span class="math-display">34%</span> (half of 68%)' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' },
+                        { ar: '<span class="math-display">16%</span>', en: '<span class="math-display">16%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '68% بين μ-σ و μ+σ، بالنصف = 34% بين μ و μ+σ', en: '68% between μ-σ and μ+σ, half = 34% between μ and μ+σ' }
+                }
+            ]
+        },
+        {
+            id: 'sec2',
+            title: { ar: '🔹 القسم 2: مثال 1 - أطوال الطلاب (μ=168, σ=6, n=880) (Q6-Q10)', en: '🔹 Section 2: Example 1 - Student Heights (μ=168, σ=6, n=880) (Q6-Q10)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س6 (مثل مثال 1a):</strong> 880 طالباً، μ=168 cm، σ=6 cm. كم طالباً يتجاوز طوله 180 cm تقريباً؟', en: '<strong>Q6 (like Example 1a):</strong> 880 students, μ=168 cm, σ=6 cm. How many students exceed 180 cm?' },
+                    svg: svgGraphs.example1_heights,
+                    options: [
+                        { ar: '<span class="math-display">22 طالباً</span>', en: '<span class="math-display">22 students</span>' },
+                        { ar: '<span class="math-display">44 طالباً</span>', en: '<span class="math-display">44 students</span>' },
+                        { ar: '<span class="math-display">11 طالباً</span>', en: '<span class="math-display">11 students</span>' },
+                        { ar: '<span class="math-display">88 طالباً</span>', en: '<span class="math-display">88 students</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '180 = μ + 2σ. P(X > 180) = 2.5%. 2.5% × 880 = 22 طالباً', en: '180 = μ + 2σ. P(X > 180) = 2.5%. 2.5% × 880 = 22 students' }
+                },
+                {
+                    q: { ar: '<strong>س7:</strong> في مثال 1، ما قيمة z-score للطول 180 cm؟', en: '<strong>Q7:</strong> In Example 1, what is the z-score for height 180 cm?' },
+                    options: [
+                        { ar: '<span class="math-display">z = +2</span>', en: '<span class="math-display">z = +2</span>' },
+                        { ar: '<span class="math-display">z = +3</span>', en: '<span class="math-display">z = +3</span>' },
+                        { ar: '<span class="math-display">z = +1</span>', en: '<span class="math-display">z = +1</span>' },
+                        { ar: '<span class="math-display">z = 0</span>', en: '<span class="math-display">z = 0</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (180-168)/6 = 12/6 = +2', en: 'z = (180-168)/6 = 12/6 = +2' }
+                },
+                {
+                    q: { ar: '<strong>س8 (مثل مثال 1b):</strong> ما النسبة المئوية للطلاب الذين يتراوح طولهم بين 150 cm و 174 cm؟', en: '<strong>Q8 (like Example 1b):</strong> What percentage of students have heights between 150 cm and 174 cm?' },
+                    options: [
+                        { ar: '<span class="math-display">83.85%</span>', en: '<span class="math-display">83.85%</span>' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">49.85%</span>', en: '<span class="math-display">49.85%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '150 = μ-3σ, 174 = μ+σ. P = 49.85% + 34% = 83.85%', en: '150 = μ-3σ, 174 = μ+σ. P = 49.85% + 34% = 83.85%' }
+                },
+                {
+                    q: { ar: '<strong>س9:</strong> في مثال 1، كم طالباً طولهم بين 162 cm و 174 cm؟', en: '<strong>Q9:</strong> In Example 1, how many students have heights between 162 cm and 174 cm?' },
+                    options: [
+                        { ar: '<span class="math-display">598 طالباً</span> (68% من 880)', en: '<span class="math-display">598 students</span> (68% of 880)' },
+                        { ar: '<span class="math-display">440 طالباً</span>', en: '<span class="math-display">440 students</span>' },
+                        { ar: '<span class="math-display">299 طالباً</span>', en: '<span class="math-display">299 students</span>' },
+                        { ar: '<span class="math-display">880 طالباً</span>', en: '<span class="math-display">880 students</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '162 = μ-σ, 174 = μ+σ. P = 68%. 68% × 880 = 598.4 ≈ 598', en: '162 = μ-σ, 174 = μ+σ. P = 68%. 68% × 880 ≈ 598' }
+                },
+                {
+                    q: { ar: '<strong>س10:</strong> في مثال 1، ما احتمال أن يكون طول الطالب أقل من 150 cm؟', en: '<strong>Q10:</strong> In Example 1, what is probability student height is less than 150 cm?' },
+                    options: [
+                        { ar: '<span class="math-display">0.15%</span>', en: '<span class="math-display">0.15%</span>' },
+                        { ar: '<span class="math-display">2.5%</span>', en: '<span class="math-display">2.5%</span>' },
+                        { ar: '<span class="math-display">16%</span>', en: '<span class="math-display">16%</span>' },
+                        { ar: '<span class="math-display">0.3%</span>', en: '<span class="math-display">0.3%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '150 = μ-3σ. P(X < μ-3σ) = 0.15%', en: '150 = μ-3σ. P(X < μ-3σ) = 0.15%' }
+                }
+            ]
+        },
+        {
+            id: 'sec3',
+            title: { ar: '🔹 القسم 3: تمرين 1 - قوارير الماء (μ=1.1, σ=0.02, n=120) (Q11-Q15)', en: '🔹 Section 3: Exercise 1 - Water Bottles (μ=1.1, σ=0.02, n=120) (Q11-Q15)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س11 (مثل تمرين 1A):</strong> 120 قارورة، μ=1.1 L، σ=0.02 L. ما العدد التقريبي للقوارير التي تحتوي أقل من 1.06 L؟', en: '<strong>Q11 (like Exercise 1A):</strong> 120 bottles, μ=1.1 L, σ=0.02 L. Approximate number with less than 1.06 L?' },
+                    svg: svgGraphs.exercise1_bottles,
+                    options: [
+                        { ar: '<span class="math-display">3 قوارير</span>', en: '<span class="math-display">3 bottles</span>' },
+                        { ar: '<span class="math-display">6 قوارير</span>', en: '<span class="math-display">6 bottles</span>' },
+                        { ar: '<span class="math-display">12 قارورة</span>', en: '<span class="math-display">12 bottles</span>' },
+                        { ar: '<span class="math-display">1 قارورة</span>', en: '<span class="math-display">1 bottle</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '1.06 = μ-2σ. P(X < 1.06) = 2.5%. 2.5% × 120 = 3 قوارير', en: '1.06 = μ-2σ. P(X < 1.06) = 2.5%. 2.5% × 120 = 3 bottles' }
+                },
+                {
+                    q: { ar: '<strong>س12:</strong> في تمرين 1، ما z-score للحجم 1.06 L؟', en: '<strong>Q12:</strong> In Exercise 1, what is z-score for volume 1.06 L?' },
+                    options: [
+                        { ar: '<span class="math-display">z = -2</span>', en: '<span class="math-display">z = -2</span>' },
+                        { ar: '<span class="math-display">z = +2</span>', en: '<span class="math-display">z = +2</span>' },
+                        { ar: '<span class="math-display">z = -1</span>', en: '<span class="math-display">z = -1</span>' },
+                        { ar: '<span class="math-display">z = 0</span>', en: '<span class="math-display">z = 0</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (1.06-1.1)/0.02 = -0.04/0.02 = -2', en: 'z = (1.06-1.1)/0.02 = -0.04/0.02 = -2' }
+                },
+                {
+                    q: { ar: '<strong>س13 (مثل تمرين 1B):</strong> ما النسبة المئوية للقوارير التي تحتوي بين 1.08 L و 1.14 L؟', en: '<strong>Q13 (like Exercise 1B):</strong> What percentage of bottles contain between 1.08 L and 1.14 L?' },
+                    options: [
+                        { ar: '<span class="math-display">81.5%</span>', en: '<span class="math-display">81.5%</span>' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">47.5%</span>', en: '<span class="math-display">47.5%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '1.08 = μ-σ, 1.14 = μ+2σ. P = 34% + 34% + 13.5% = 81.5%', en: '1.08 = μ-σ, 1.14 = μ+2σ. P = 34% + 34% + 13.5% = 81.5%' }
+                },
+                {
+                    q: { ar: '<strong>س14:</strong> في تمرين 1، كم قارورة تحتوي أكثر من 1.14 L؟', en: '<strong>Q14:</strong> In Exercise 1, how many bottles contain more than 1.14 L?' },
+                    options: [
+                        { ar: '<span class="math-display">3 قوارير</span>', en: '<span class="math-display">3 bottles</span>' },
+                        { ar: '<span class="math-display">6 قوارير</span>', en: '<span class="math-display">6 bottles</span>' },
+                        { ar: '<span class="math-display">12 قارورة</span>', en: '<span class="math-display">12 bottles</span>' },
+                        { ar: '<span class="math-display">30 قارورة</span>', en: '<span class="math-display">30 bottles</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '1.14 = μ+2σ. P(X > 1.14) = 2.5%. 2.5% × 120 = 3 قوارير', en: '1.14 = μ+2σ. P(X > 1.14) = 2.5%. 2.5% × 120 = 3 bottles' }
+                },
+                {
+                    q: { ar: '<strong>س15:</strong> في تمرين 1، ما احتمال أن تحتوي قارورة بين 1.10 L و 1.12 L؟', en: '<strong>Q15:</strong> In Exercise 1, what is probability bottle contains between 1.10 L and 1.12 L?' },
+                    options: [
+                        { ar: '<span class="math-display">34%</span>', en: '<span class="math-display">34%</span>' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">47.5%</span>', en: '<span class="math-display">47.5%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '1.10 = μ, 1.12 = μ+σ. P = 34% (نصف 68%)', en: '1.10 = μ, 1.12 = μ+σ. P = 34% (half of 68%)' }
+                }
+            ]
+        },
+        {
+            id: 'sec4',
+            title: { ar: '🔹 القسم 4: الدرجات المعيارية Z-Scores (Q16-Q20)', en: '🔹 Section 4: Z-Scores (Q16-Q20)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س16:</strong> ما صيغة الدرجة المعيارية z-score؟', en: '<strong>Q16:</strong> What is the z-score formula?' },
+                    svg: svgGraphs.z_score_visual,
+                    options: [
+                        { ar: '<span class="math-display">z = (x - μ)/σ</span>', en: '<span class="math-display">z = (x - μ)/σ</span>' },
+                        { ar: '<span class="math-display">z = (μ - x)/σ</span>', en: '<span class="math-display">z = (μ - x)/σ</span>' },
+                        { ar: '<span class="math-display">z = x·σ + μ</span>', en: '<span class="math-display">z = x·σ + μ</span>' },
+                        { ar: '<span class="math-display">z = σ/(x-μ)</span>', en: '<span class="math-display">z = σ/(x-μ)</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (x - μ)/σ تقيس عدد الانحرافات المعيارية عن المتوسط', en: 'z = (x - μ)/σ measures number of standard deviations from mean' }
+                },
+                {
+                    q: { ar: '<strong>س17:</strong> إذا كان μ=100 و σ=15 و x=130، فما z-score؟', en: '<strong>Q17:</strong> If μ=100, σ=15, x=130, what is z-score?' },
+                    options: [
+                        { ar: '<span class="math-display">z = +2</span>', en: '<span class="math-display">z = +2</span>' },
+                        { ar: '<span class="math-display">z = +1</span>', en: '<span class="math-display">z = +1</span>' },
+                        { ar: '<span class="math-display">z = +3</span>', en: '<span class="math-display">z = +3</span>' },
+                        { ar: '<span class="math-display">z = -2</span>', en: '<span class="math-display">z = -2</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (130-100)/15 = 30/15 = +2', en: 'z = (130-100)/15 = 30/15 = +2' }
+                },
+                {
+                    q: { ar: '<strong>س18:</strong> إذا كان μ=50 و σ=5 و x=40، فما z-score؟', en: '<strong>Q18:</strong> If μ=50, σ=5, x=40, what is z-score?' },
+                    options: [
+                        { ar: '<span class="math-display">z = -2</span>', en: '<span class="math-display">z = -2</span>' },
+                        { ar: '<span class="math-display">z = +2</span>', en: '<span class="math-display">z = +2</span>' },
+                        { ar: '<span class="math-display">z = -1</span>', en: '<span class="math-display">z = -1</span>' },
+                        { ar: '<span class="math-display">z = +1</span>', en: '<span class="math-display">z = +1</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (40-50)/5 = -10/5 = -2', en: 'z = (40-50)/5 = -10/5 = -2' }
+                },
+                {
+                    q: { ar: '<strong>س19:</strong> ما معنى z = 0؟', en: '<strong>Q19:</strong> What does z = 0 mean?' },
+                    options: [
+                        { ar: 'القيمة تساوي المتوسط تماماً', en: 'Value equals the mean exactly' },
+                        { ar: 'القيمة صفر', en: 'Value is zero' },
+                        { ar: 'لا يوجد انحراف معياري', en: 'No standard deviation' },
+                        { ar: 'القيمة متطرفة', en: 'Value is extreme' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = 0 يعني x = μ (القيمة تساوي المتوسط)', en: 'z = 0 means x = μ (value equals the mean)' }
+                },
+                {
+                    q: { ar: '<strong>س20:</strong> إذا z = 1.5 و μ=100 و σ=10، فما قيمة x؟', en: '<strong>Q20:</strong> If z = 1.5, μ=100, σ=10, what is x?' },
+                    options: [
+                        { ar: '<span class="math-display">x = 115</span>', en: '<span class="math-display">x = 115</span>' },
+                        { ar: '<span class="math-display">x = 100</span>', en: '<span class="math-display">x = 100</span>' },
+                        { ar: '<span class="math-display">x = 85</span>', en: '<span class="math-display">x = 85</span>' },
+                        { ar: '<span class="math-display">x = 150</span>', en: '<span class="math-display">x = 150</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'x = μ + z·σ = 100 + 1.5·10 = 115', en: 'x = μ + z·σ = 100 + 1.5·10 = 115' }
+                }
+            ]
+        },
+        {
+            id: 'sec5',
+            title: { ar: '🔹 القسم 5: حساب المساحات تحت المنحنى (Q21-Q25)', en: '🔹 Section 5: Area Under Curve Calculations (Q21-Q25)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س21:</strong> في التوزيع الطبيعي المعياري، ما P(Z < 1)؟', en: '<strong>Q21:</strong> In standard normal distribution, what is P(Z < 1)?' },
+                    svg: svgGraphs.standard_normal_table,
+                    options: [
+                        { ar: '<span class="math-display">84.13%</span>', en: '<span class="math-display">84.13%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' },
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">97.72%</span>', en: '<span class="math-display">97.72%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(Z < 1) = 50% + 34.13% = 84.13%', en: 'P(Z < 1) = 50% + 34.13% = 84.13%' }
+                },
+                {
+                    q: { ar: '<strong>س22:</strong> ما P(Z > 2) في التوزيع الطبيعي المعياري؟', en: '<strong>Q22:</strong> What is P(Z > 2) in standard normal?' },
+                    options: [
+                        { ar: '<span class="math-display">2.28%</span>', en: '<span class="math-display">2.28%</span>' },
+                        { ar: '<span class="math-display">5%</span>', en: '<span class="math-display">5%</span>' },
+                        { ar: '<span class="math-display">97.72%</span>', en: '<span class="math-display">97.72%</span>' },
+                        { ar: '<span class="math-display">47.72%</span>', en: '<span class="math-display">47.72%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(Z > 2) = (100% - 95%)/2 = 2.5% ≈ 2.28%', en: 'P(Z > 2) = (100% - 95%)/2 = 2.5% ≈ 2.28%' }
+                },
+                {
+                    q: { ar: '<strong>س23:</strong> ما P(-1 < Z < 1) في التوزيع الطبيعي المعياري؟', en: '<strong>Q23:</strong> What is P(-1 < Z < 1) in standard normal?' },
+                    options: [
+                        { ar: '<span class="math-display">68%</span>', en: '<span class="math-display">68%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">34%</span>', en: '<span class="math-display">34%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(-1 < Z < 1) = 68% (ضمن ±1σ)', en: 'P(-1 < Z < 1) = 68% (within ±1σ)' }
+                },
+                {
+                    q: { ar: '<strong>س24:</strong> ما المساحة بين z = 0 و z = 2؟', en: '<strong>Q24:</strong> What is the area between z = 0 and z = 2?' },
+                    options: [
+                        { ar: '<span class="math-display">47.72%</span>', en: '<span class="math-display">47.72%</span>' },
+                        { ar: '<span class="math-display">34%</span>', en: '<span class="math-display">34%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'المساحة بين 0 و 2σ = 95%/2 = 47.5% ≈ 47.72%', en: 'Area between 0 and 2σ = 95%/2 = 47.5% ≈ 47.72%' }
+                },
+                {
+                    q: { ar: '<strong>س25:</strong> ما P(Z < -1) في التوزيع الطبيعي المعياري؟', en: '<strong>Q25:</strong> What is P(Z < -1) in standard normal?' },
+                    options: [
+                        { ar: '<span class="math-display">15.87%</span>', en: '<span class="math-display">15.87%</span>' },
+                        { ar: '<span class="math-display">34%</span>', en: '<span class="math-display">34%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' },
+                        { ar: '<span class="math-display">84.13%</span>', en: '<span class="math-display">84.13%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(Z < -1) = 50% - 34.13% = 15.87%', en: 'P(Z < -1) = 50% - 34.13% = 15.87%' }
+                }
+            ]
+        },
+        {
+            id: 'sec6',
+            title: { ar: '🔹 القسم 6: مسائل مركبة وتطبيقات (Q26-Q30)', en: '🔹 Section 6: Mixed Problems & Applications (Q26-Q30)' },
+            questions: [
+                {
+                    q: { ar: '<strong>س26:</strong> درجات اختبار μ=75, σ=10. طالب درجته 95. ما z-score؟', en: '<strong>Q26:</strong> Test scores μ=75, σ=10. Student score 95. What is z-score?' },
+                    svg: svgGraphs.area_regions,
+                    options: [
+                        { ar: '<span class="math-display">z = +2</span>', en: '<span class="math-display">z = +2</span>' },
+                        { ar: '<span class="math-display">z = +1</span>', en: '<span class="math-display">z = +1</span>' },
+                        { ar: '<span class="math-display">z = +2.5</span>', en: '<span class="math-display">z = +2.5</span>' },
+                        { ar: '<span class="math-display">z = +3</span>', en: '<span class="math-display">z = +3</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (95-75)/10 = 20/10 = +2', en: 'z = (95-75)/10 = 20/10 = +2' }
+                },
+                {
+                    q: { ar: '<strong>س27:</strong> في سؤال 26، ما نسبة الطلاب الذين درجاتهم أقل من 95؟', en: '<strong>Q27:</strong> In Q26, what percentage of students scored below 95?' },
+                    options: [
+                        { ar: '<span class="math-display">97.72%</span>', en: '<span class="math-display">97.72%</span>' },
+                        { ar: '<span class="math-display">84.13%</span>', en: '<span class="math-display">84.13%</span>' },
+                        { ar: '<span class="math-display">95%</span>', en: '<span class="math-display">95%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'P(Z < 2) = 50% + 47.72% = 97.72%', en: 'P(Z < 2) = 50% + 47.72% = 97.72%' }
+                },
+                {
+                    q: { ar: '<strong>س28:</strong> أوزان المواليد μ=3.5 kg, σ=0.5 kg. ما احتمال وزن أقل من 2.5 kg؟', en: '<strong>Q28:</strong> Baby weights μ=3.5 kg, σ=0.5 kg. Probability weight less than 2.5 kg?' },
+                    options: [
+                        { ar: '<span class="math-display">2.5%</span>', en: '<span class="math-display">2.5%</span>' },
+                        { ar: '<span class="math-display">16%</span>', en: '<span class="math-display">16%</span>' },
+                        { ar: '<span class="math-display">0.15%</span>', en: '<span class="math-display">0.15%</span>' },
+                        { ar: '<span class="math-display">50%</span>', en: '<span class="math-display">50%</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'z = (2.5-3.5)/0.5 = -2. P(Z < -2) = 2.5%', en: 'z = (2.5-3.5)/0.5 = -2. P(Z < -2) = 2.5%' }
+                },
+                {
+                    q: { ar: '<strong>س29:</strong> في سؤال 28، إذا وُلد 1000 طفل، كم وزنه أقل من 2.5 kg؟', en: '<strong>Q29:</strong> In Q28, if 1000 babies born, how many weigh less than 2.5 kg?' },
+                    options: [
+                        { ar: '<span class="math-display">25 طفلاً</span>', en: '<span class="math-display">25 babies</span>' },
+                        { ar: '<span class="math-display">50 طفلاً</span>', en: '<span class="math-display">50 babies</span>' },
+                        { ar: '<span class="math-display">160 طفلاً</span>', en: '<span class="math-display">160 babies</span>' },
+                        { ar: '<span class="math-display">10 أطفال</span>', en: '<span class="math-display">10 babies</span>' }
+                    ],
+                    correct: 0,
+                    answer: { ar: '2.5% × 1000 = 25 طفلاً', en: '2.5% × 1000 = 25 babies' }
+                },
+                {
+                    q: { ar: '<strong>س30:</strong> أي عبارة صحيحة عن التوزيع الطبيعي؟', en: '<strong>Q30:</strong> Which statement about normal distribution is true?' },
+                    svg: svgGraphs.normal_distribution_properties,
+                    options: [
+                        { ar: 'متماثل حول المتوسط، والمتوسط = الوسيط = المنوال', en: 'Symmetric about mean, and mean = median = mode' },
+                        { ar: 'ملتوي دائماً لليمين', en: 'Always right-skewed' },
+                        { ar: 'المتوسط دائماً أكبر من الوسيط', en: 'Mean always greater than median' },
+                        { ar: 'لا يمكن أن يكون سالباً', en: 'Cannot be negative' }
+                    ],
+                    correct: 0,
+                    answer: { ar: 'التوزيع الطبيعي متماثل تماماً حول المتوسط، حيث المتوسط = الوسيط = المنوال', en: 'Normal distribution is perfectly symmetric about mean, where mean = median = mode' }
+                }
+            ]
+        }
+    ]
+};
+
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function prepareShuffledExam() {
+    rng = mulberry32(currentSeed);
+    examData = JSON.parse(JSON.stringify(originalExamData));
+    correctAnswersMap = {};
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        section.questions = shuffleArray(section.questions);
+        section.questions.forEach((q) => {
+            const optionsWithCorrect = q.options.map((opt, idx) => ({ option: opt, isCorrect: idx === q.correct }));
+            const shuffledOptions = shuffleArray(optionsWithCorrect);
+            q.options = shuffledOptions.map(o => o.option);
+            q.correct = shuffledOptions.findIndex(o => o.isCorrect);
+            correctAnswersMap[globalIdx] = String.fromCharCode(97 + q.correct);
+            globalIdx++;
+        });
+    });
+}
+
+function reshuffleExam() {
+    const msg = currentLang === 'ar' ? '🔄 سيتم إنشاء أسئلة جديدة ومسح إجاباتك. هل أنت متأكد؟' : '🔄 New questions will be generated. Are you sure?';
+    if (confirm(msg)) {
+        currentSeed = Date.now(); timeRemaining = TOTAL_TIME; answersVisible = false;
+        prepareShuffledExam(); renderExam(); saveState();
+        alert(currentLang === 'ar' ? '🎲 تم تغيير الأسئلة! حظاً موفقاً! 🍀' : '🎲 Questions changed! Good luck! 🍀');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.body.classList.toggle('en-mode', lang === 'en');
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+    
+    renderExam(); saveState(false);
+}
+
+function renderExam() {
+    const container = document.getElementById('exam-content');
+    const labels = { ar: { option: ['أ', 'ب', 'ج', 'د'], answer: '✅ الإجابة:' }, en: { option: ['A', 'B', 'C', 'D'], answer: '✅ Answer:' } };
+    const lbl = labels[currentLang];
+    let html = '';
+    let globalIdx = 0;
+    
+    examData.sections.forEach((section, secIdx) => {
+        const badgeClass = ['module-1', 'module-2', 'module-3', 'module-4', 'module-5', 'module-6'][secIdx];
+        html += '<section class="bg-white p-6 rounded-2xl shadow-lg border-2 border-blue-100">';
+        html += '<div class="text-center mb-4"><span class="module-badge ' + badgeClass + '">' + section.title[currentLang] + '</span></div>';
+        html += '<div class="space-y-4">';
+        
+        section.questions.forEach((q) => {
+            html += '<div class="question-card" id="q-' + globalIdx + '">';
+            html += '<strong class="text-blue-700 text-lg">' + (currentLang === 'ar' ? 'السؤال ' : 'Question ') + (globalIdx + 1) + '</strong><br>';
+            html += '<div class="mt-2">' + q.q[currentLang] + '</div>';
+            if (q.svg) html += '<div class="graph-container">' + q.svg + '</div>';
+            
+            html += '<div class="mt-4 space-y-2">';
+            q.options.forEach((opt, oIdx) => {
+                html += '<label class="cursor-pointer block hover:bg-blue-50 rounded-lg p-3 transition border border-gray-200">';
+                html += '<input type="radio" name="q' + globalIdx + '" value="' + String.fromCharCode(97 + oIdx) + '" class="mr-2 ml-2">';
+                html += '<span class="arabic-math">' + lbl.option[oIdx] + ') ' + opt[currentLang] + '</span>';
+                html += '</label>';
+            });
+            html += '</div>';
+            
+            html += '<div class="flex gap-2 mt-3">';
+            html += '<button onclick="checkAnswer(' + globalIdx + ')" class="check-btn">' + (currentLang === 'ar' ? '✓ تحقق' : '✓ Check') + '</button>';
+            html += '<button onclick="toggleSolution(' + globalIdx + ')" class="show-answer-btn">' + (currentLang === 'ar' ? '📖 أظهر الحل' : '📖 Show Solution') + '</button>';
+            html += '</div>';
+            
+            html += '<div id="solution-' + globalIdx + '" class="solution-box">';
+            html += '<strong class="text-green-700">' + lbl.answer + ' ' + lbl.option[q.correct] + ')</strong> ';
+            html += '<span class="arabic-math text-green-700">' + q.options[q.correct][currentLang] + '</span><br>';
+            html += '<span class="text-sm text-green-700 mt-2 block arabic-math">' + q.answer[currentLang] + '</span>';
+            html += '</div>';
+            html += '</div>';
+            globalIdx++;
+        });
+        
+        html += '</div></section>';
+    });
+    
+    container.innerHTML = html;
+}
+
+function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining % 60 === 0) saveState(false);
+        if (timeRemaining <= 600) document.getElementById('timer').classList.add('timer-warning');
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert(currentLang === 'ar' ? "⏰ انتهى الوقت!" : "⏰ Time's up!");
+            gradeExam();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timeRemaining / 60);
+    const s = timeRemaining % 60;
+    document.getElementById('timer').textContent = m.toString().padStart(2,'0') + ':' + s.toString().padStart(2,'0');
+}
+
+function toggleAnswers() {
+    answersVisible = !answersVisible;
+    document.querySelectorAll('.solution-box').forEach(el => {
+        if (answersVisible) {
+            el.classList.add('show');
+        } else {
+            el.classList.remove('show');
+        }
+    });
+    saveState(false);
+}
+
+function checkAnswer(qId) {
+    const sel = document.querySelector('input[name="q'+qId+'"]:checked');
+    
+    if (!sel) {
+        alert(currentLang === 'ar' ? '⚠️ الرجاء اختيار إجابة أولاً' : '⚠️ Please select an answer first');
+        return;
+    }
+    
+    const isCorrect = sel.value === correctAnswersMap[qId];
+    const card = document.getElementById('q-' + qId);
+    card.classList.remove('correct', 'incorrect');
+    card.classList.add(isCorrect ? 'correct' : 'incorrect');
+    
+    const solution = document.getElementById('solution-' + qId);
+    solution.classList.add('show');
+    
+    if (isCorrect) {
+        alert(currentLang === 'ar' ? '✅ إجابة صحيحة! أحسنت!' : '✅ Correct answer! Well done!');
+    } else {
+        alert(currentLang === 'ar' ? '❌ إجابة غير صحيحة. راجع الحل.' : '❌ Incorrect answer. Check the solution.');
+    }
+}
+
+function toggleSolution(qId) {
+    const solution = document.getElementById('solution-' + qId);
+    solution.classList.toggle('show');
+}
+
+function gradeExam() {
+    let correctCount = 0;
+    const sectionScores = new Array(TOTAL_SECTIONS).fill(0);
+    
+    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
+        const sel = document.querySelector('input[name="q'+i+'"]:checked');
+        const card = document.getElementById('q-' + i);
+        if (card) {
+            const isCorrect = sel && sel.value === correctAnswersMap[i];
+            if (isCorrect) {
+                correctCount++;
+                card.classList.add('correct');
+                card.classList.remove('incorrect');
+                sectionScores[Math.floor(i / QUESTIONS_PER_SECTION)]++;
+            } else {
+                card.classList.add('incorrect');
+                card.classList.remove('correct');
+            }
+        }
+    }
+    
+    const score = Math.round((correctCount / TOTAL_QUESTIONS) * 100);
+    document.getElementById('res-total').textContent = score + ' / 100';
+    document.getElementById('res-name').textContent = document.getElementById('studentName').value || (currentLang === 'ar' ? 'بطل' : 'Champion');
+    document.getElementById('res-date').textContent = new Date().toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
+    
+    const pc = document.getElementById('sections-performance');
+    pc.innerHTML = '';
+    examData.sections.forEach((s, idx) => {
+        pc.innerHTML += '<div class="flex justify-between items-center p-3 bg-white rounded-lg"><span class="text-gray-700">' + s.title[currentLang] + '</span><span class="font-bold text-blue-700">' + sectionScores[idx] + '/' + QUESTIONS_PER_SECTION + '</span></div>';
+    });
+    
+    const badge = document.getElementById('success-badge');
+    document.getElementById('success-percent').textContent = score + '%';
+    
+    if (currentLang === 'ar') {
+        if (score >= 90) { badge.textContent = '🌟 ممتاز جداً!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 ممتاز!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 جيد'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 حاول مرة أخرى'; badge.className = 'success-badge grade-fail'; }
+    } else {
+        if (score >= 90) { badge.textContent = '🌟 Outstanding!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 Excellent!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 Good'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 Try Again'; badge.className = 'success-badge grade-fail'; }
+    }
+    
+    document.getElementById('results-panel').classList.remove('hidden');
+    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth' });
+    if (timerInterval) clearInterval(timerInterval);
+}
+
+function sendResultsToEmail() {
+    const btn = document.getElementById('sendEmailBtn');
+    const status = document.getElementById('emailStatus');
+    btn.disabled = true;
+    btn.textContent = currentLang === 'ar' ? '⏳ جاري الإرسال...' : '⏳ Sending...';
+    
+    const name = document.getElementById('studentName').value || 'N/A';
+    const studentClass = document.getElementById('studentClass').value || 'N/A';
+    const date = document.getElementById('examDate').value || new Date().toLocaleDateString();
+    const score = document.getElementById('res-total').textContent;
+    const successRate = document.getElementById('success-percent').textContent;
+    const badge = document.getElementById('success-badge').textContent;
+    
+    let questionsHTML = '<div style="font-family:Arial; direction:rtl;">';
+    questionsHTML += '<h2>📊 ' + (currentLang === 'ar' ? 'نتيجة امتحان المساحة تحت منحنيات التوزيع' : 'Area Under Distribution Curves Exam Result') + '</h2>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الاسم' : 'Name') + ':</strong> ' + name + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الشعبة' : 'Class') + ':</strong> ' + studentClass + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التاريخ' : 'Date') + ':</strong> ' + date + '</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'الدرجة' : 'Score') + ':</strong> ' + score + ' (' + successRate + '%)</p>';
+    questionsHTML += '<p><strong>' + (currentLang === 'ar' ? 'التقدير' : 'Grade') + ':</strong> ' + badge + '</p>';
+    questionsHTML += '<hr><h3>' + (currentLang === 'ar' ? 'تفاصيل الإجابات:' : 'Answer Details:') + '</h3><table style="width:100%; border-collapse:collapse;">';
+    questionsHTML += '<tr style="background:#2563eb; color:white;"><th style="padding:8px; border:1px solid #ddd;">#</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'السؤال' : 'Question') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'إجابة الطالب' : 'Student Answer') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'الصحيحة' : 'Correct') + '</th><th style="padding:8px; border:1px solid #ddd;">' + (currentLang === 'ar' ? 'النتيجة' : 'Result') + '</th></tr>';
+    
+    let globalIdx = 0;
+    examData.sections.forEach((section) => {
+        questionsHTML += '<tr style="background:#dbeafe;"><td colspan="5" style="padding:8px; font-weight:bold; border:1px solid #ddd;">' + section.title.ar + '</td></tr>';
+        section.questions.forEach((q) => {
+            const sel = document.querySelector('input[name="q'+globalIdx+'"]:checked');
+            const sv = sel ? sel.value : null;
+            const cv = correctAnswersMap[globalIdx];
+            const ic = sv === cv;
+            let sat = currentLang === 'ar' ? '❌ لم يجب' : '❌ No answer';
+            let sac = '#dc2626';
+            if (sv) {
+                const si = sv.charCodeAt(0) - 97;
+                sat = q.options[si][currentLang];
+                sac = ic ? '#16a34a' : '#dc2626';
+            }
+            const cat = q.options[q.correct][currentLang];
+            const rb = ic ? '#f0fdf4' : '#fef2f2';
+            questionsHTML += '<tr style="background:' + rb + ';"><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (globalIdx+1) + '</td><td style="padding:8px; border:1px solid #ddd;">' + q.q.ar.replace(/<[^>]+>/g, '').substring(0, 80) + '...</td><td style="padding:8px; border:1px solid #ddd; color:' + sac + ';">' + sat + '</td><td style="padding:8px; border:1px solid #ddd; color:#16a34a;">' + cat + '</td><td style="padding:8px; border:1px solid #ddd; text-align:center;">' + (ic?'✅':'❌') + '</td></tr>';
+            globalIdx++;
+        });
+    });
+    questionsHTML += '</table></div>';
+    
+    const templateParams = {
+        to_email: TARGET_EMAIL,
+        student_name: name,
+        student_class: studentClass,
+        exam_date: date,
+        total_score: score,
+        success_rate: successRate,
+        grade: badge,
+        answers_table: questionsHTML
+    };
+    
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+        .then(() => {
+            status.textContent = currentLang === 'ar' ? '✅ تم الإرسال بنجاح!' : '✅ Sent successfully!';
+            status.style.color = '#16a34a';
+            btn.textContent = currentLang === 'ar' ? '✓ تم' : '✓ Sent';
+            alert(currentLang === 'ar' ? 'تم إرسال النتيجة للمعلم بنجاح!' : 'Result sent to teacher successfully!');
+        })
+        .catch((error) => {
+            status.textContent = currentLang === 'ar' ? '❌ فشل الإرسال' : '❌ Failed to send';
+            status.style.color = '#dc2626';
+            btn.disabled = false;
+            btn.textContent = currentLang === 'ar' ? '📧 حاول مرة أخرى' : '📧 Try Again';
+            alert(currentLang === 'ar' ? 'فشل الإرسال: ' + error.text : 'Failed: ' + error.text);
+        });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = loadState();
+    if (saved && saved.seed) {
+        currentSeed = saved.seed;
+        currentLang = saved.lang || 'ar';
+        timeRemaining = saved.timeRemaining !== undefined ? saved.timeRemaining : TOTAL_TIME;
+        answersVisible = saved.answersVisible || false;
+    } else {
+        currentSeed = Date.now();
+    }
+    
+    document.getElementById('btn-ar').classList.toggle('active', currentLang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
+    document.body.classList.toggle('en-mode', currentLang === 'en');
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    
+    document.querySelectorAll('[data-ar]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + currentLang);
+    });
+    
+    document.querySelectorAll('[data-placeholder-ar]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + currentLang);
+    });
+    
+    prepareShuffledExam();
+    renderExam();
+    if (saved) {
+        if (saved.studentName) document.getElementById('studentName').value = saved.studentName;
+        if (saved.studentClass) document.getElementById('studentClass').value = saved.studentClass;
+        if (saved.examDate) document.getElementById('examDate').value = saved.examDate;
+        if (saved.answers) restoreAnswers(saved.answers);
+    }
+    setupAnswerListeners();
+    setupInputListeners();
+    startTimer();
+});
+window.addEventListener('beforeunload', () => saveState(false));
+</script>
+</body>
+</html>
